@@ -1,0 +1,39 @@
+<button (click)="shuffleCards()">Shuffle</button>
+<!--div class="shuffle-container">
+  <div
+    class="card"
+    *ngFor="let card of cards; let i = index"
+    [ngStyle]="{
+      'transform': 'translate(' + card.position.x + 'px, ' + card.position.y + 'px)'
+    }"
+  >
+    {{ card.value }}
+  </div>
+</!--div>
+
+<div-- class="shuffle-container">
+  <div
+    class="card"
+    *ngFor="let card of cards; let i = index"
+    [ngStyle]="{
+      'transform': 'translate(' + card.position.x + 'px, ' + card.position.y + 'px)'
+    }"
+  >
+    {{ card.value }}
+  </div>
+</div-->
+<!--div class="deck" id="deck">
+  <div *ngFor="let card of deck.getCards(); let i = index">
+    <div class="card black">
+      <div class="card-topleft">
+        <div class="card-corner-rank">{{card.getRank()}}</div>
+        <div class="card-corner-suit">{{card.getSuit()}}</div>
+      </div>
+      <div class="card-bottomright">
+        <div class="card-corner-rank">{{card.getRank()}}</div>
+        <div class="card-corner-suit">{{card.getSuit()}}</div>
+      </div>
+    </div>
+  </div>
+</div-->
+<div class="deck" id="deck"></div>
