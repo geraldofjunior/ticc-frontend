@@ -1,4 +1,6 @@
+import { style } from '@angular/animations';
 import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Card } from 'src/app/entities/card';
 import { Deck } from 'src/app/entities/deck';
 
 @Component({
@@ -36,7 +38,15 @@ export class CardComponent implements OnInit {
     this.deck.shuffle().forEach(card => console.log(card.getName()));
   }
 
-  public el(tagName: string, attributes: any, children: any = null) {
+  private animateShuffle(): void {
+    let cards: Card[] = this.deck.getCards(),
+        left: Card[],
+        right: Card[];
+
+    // First, lets center all cards
+  }
+
+  public createElement(tagName: string, attributes: any, children: any = null) {
     const element = this.renderer.createElement(tagName);
     if (attributes) {
       for (const attrName in attributes) {
@@ -56,33 +66,11 @@ export class CardComponent implements OnInit {
     return element;
   };
 
-  public div(attributes: any, children: any = null) {
-    return this.el('div', attributes, children);
-  }
-
   public createCard(i:number) {
     const card = this.deck.getCard(i);
-    const rank = card.getRank();
-    const suit = card.getSuit();
+    const filename = "../../../assets/card-images/" + card.getFileName();
 
-    return this.div({ class: 'card black' }, [
-      this.div({ class: 'card-topleft' }, [
-        this.div({ class: 'card-corner-rank' }, [
-          rank
-        ]),
-        this.div({ class: 'card-corner-suit' }, [
-          suit
-        ])
-      ]),
-      this.div({ class: 'card-bottomright' }, [
-        this.div({ class: 'card-corner-rank' }, [
-          rank
-        ]),
-        this.div({ class: 'card-corner-suit' }, [
-          suit
-        ])
-      ])
-    ]);
+    return this.createElement('div', { class: 'card black', style: "background-image: url(" + filename + ")" });
   }
 
   public createDeck() {

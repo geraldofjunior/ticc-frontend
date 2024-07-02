@@ -1,9 +1,10 @@
 .card {
   display: inline-block;
   position: relative;
-  width: 5em;
-  height: 7em;
+  width: 10em;
+  height: 17em;
   background-color: #ffffff;
+  background-size: contain;
   box-shadow: 0 0.0625em 0.125em rgba(0, 0, 0, 0.15);
   border-radius: 0.25em;
 }

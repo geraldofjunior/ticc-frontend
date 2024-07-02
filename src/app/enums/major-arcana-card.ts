@@ -9,7 +9,7 @@ export enum MajorArcanaCard {
   "The Chariot",
   "Strength",
   "The Hermit",
-  "The Wheel of Fortune",
+  "Wheel of Fortune",
   "Justice",
   "The Hanged Man",
   "Death",
