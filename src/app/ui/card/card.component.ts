@@ -1,84 +1,59 @@
-import { style } from '@angular/animations';
-import { Component, OnInit, Renderer2 } from '@angular/core';
-import { Card } from 'src/app/entities/card';
-import { Deck } from 'src/app/entities/deck';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Card } from './../../entities/card';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  styleUrls: ['./card.component.css'],
+  animations: [
+    trigger('cardFlip', [
+      state('face-up', style({ transform: 'none'})),
+      state('face-down', style({ transform: 'rotateY(180deg)'})),
+      transition('default => flipped', [ animate('200ms') ]),
+      transition('flipped => default', [ animate('200ms') ])
+    ])
+  ]
 })
 export class CardComponent implements OnInit {
-  public deck: Deck = new Deck();
+  public card!: Card;
+  public cardState: string = 'face-up';
+  public imagePath: string = '';
+  private position = { x: "0", y: "0"};
 
-  ngOnInit() {
-    this.initializeDeck();
+  public ngOnInit() {
   }
 
-  public constructor(private renderer: Renderer2) {}
-
-  public initializeDeck(): void {
-    this.deck.initDeck();
-    this.createDeck();
+  public constructor() {
   }
 
-  public shuffleCards(): void {
-    const deck = new Deck();
-    deck.initDeck();
-    const randomizedDeck = deck.shuffle();
-    this.deck.setDeck(randomizedDeck);
-
-    const root = document.querySelector("#deck");
-    if (root)
-      root.innerHTML = "";
-
-    this.createDeck();
-    this.deck.getCards().forEach(card => console.log(card.getName()));
-    console.log("-----");
-    this.deck.shuffle().forEach(card => console.log(card.getName()));
+  public flip(): void {
+    this.card.flip();
+    this.cardState = this.card.isFlipped() ? 'face-up' : 'face-down';
   }
 
-  private animateShuffle(): void {
-    let cards: Card[] = this.deck.getCards(),
-        left: Card[],
-        right: Card[];
-
-    // First, lets center all cards
-  }
-
-  public createElement(tagName: string, attributes: any, children: any = null) {
-    const element = this.renderer.createElement(tagName);
-    if (attributes) {
-      for (const attrName in attributes) {
-        element.setAttribute(attrName, attributes[attrName]);
-      }
+  public initCard(index: number) {
+    let major: boolean = false,
+        rank : string  = "-1",
+        suit : number  = -1;
+    if (index < 22) {
+      major = true;
+      rank = index.toString();
+      suit = index;
+    } else {
+      major = false;
+      suit = (index - 15) / 14;
+      rank = (((index - 22) % 14) + 1).toString();
     }
-    if (children) {
-      for (let i = 0; i < children.length; i++) {
-        const child = children[i];
-        if (typeof child === 'string') {
-          element.appendChild(document.createTextNode(child));
-        } else {
-          element.appendChild(child);
-        }
-      }
-    }
-    return element;
-  };
-
-  public createCard(i:number) {
-    const card = this.deck.getCard(i);
-    const filename = "../../../assets/card-images/" + card.getFileName();
-
-    return this.createElement('div', { class: 'card black', style: "background-image: url(" + filename + ")" });
+    this.card = new Card(major, rank, suit);
+    this.imagePath = '../../../assets/card-images/' + this.card.getFileName();
   }
 
-  public createDeck() {
-    const deckElement = document.getElementById("deck");
+  public getPosition = () => this.position;
+  public getX = () => this.position.x;
+  public getY = () => this.position.y;
 
-    for (let i = 0; i < this.deck.getCardQuantity(); i++) {
-      deckElement?.appendChild(this.createCard(i));
-    }
-  }
+  public setPosition = (newX: number, newY: number) => this.position = { x: newX.toString(), y: newY.toString() }
+  public setX = (newX: number) => this.position.x = newX.toString();
 
 }

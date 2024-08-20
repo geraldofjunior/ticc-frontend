@@ -7,20 +7,32 @@
   background-size: contain;
   box-shadow: 0 0.0625em 0.125em rgba(0, 0, 0, 0.15);
   border-radius: 0.25em;
+  margin: 3px;
+  cursor: pointer;
+  transform-style: preserve-3d;
 }
-.card-topleft {
+
+:host {
+  display: block;
+  perspective: 600px;
+}
+
+.face {
+  display: block;
   position: absolute;
-  top: 0.5em;
-  left: 0.75em;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  backface-visibility: hidden;
+
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+  }
 }
-.card-bottomright {
-  position: absolute;
-  bottom: 0.5em;
-  right: 0.75em;
-  transform: rotate(180deg);
-}
-.card-corner-rank, .card-corner-suit {
-  width: 1em;
-  text-align: center;
-  transform: translate(-50%, 0);
+
+.front {
+  transform: rotateY(180deg);
 }

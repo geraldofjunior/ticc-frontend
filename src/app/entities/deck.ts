@@ -4,19 +4,17 @@ export class Deck {
   private cards:Card[] = new Array<Card>();
 
   public initDeck(): void {
+    let suit = 0;
     if (this.cards.length > 0) this.cards = new Array<Card>();
     // Init major arcana
-    const majorSuit = "0 I II III IV V VI VII VIII IX X XI XII XIII XIV XV XVI XVII XVIII IXX XX XXI".split(" ");
-    for (let i = 0; i < 22; i++) {
-      this.cards.push(new Card(true, i.toString(), majorSuit[i]));
+    for (suit = 0; suit < 22; suit++) {
+      this.cards.push(new Card(true, suit.toString(), suit));
     }
     // Init minor arcana
     const ranks = "A 2 3 4 5 6 7 8 9 10 KN J Q K".split(" ");
-    const suits = '♠︎ ♥︎ ♣︎ ♦︎'.split(' ');
 
-    suits.forEach(suit =>
-      ranks.forEach(rank => this.cards.push(new Card(false, rank, suit)))
-    );
+    for (suit = 0; suit < 4; suit++)
+      ranks.forEach(rank => this.cards.push(new Card(false, rank, suit)));
   }
 
   public shuffle(): Array<Card> {
