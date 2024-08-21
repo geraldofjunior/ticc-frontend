@@ -64,7 +64,8 @@ export class DeckComponent implements OnInit, AfterViewInit {
   /** @deprecated
    * It doesn't support any animation
    */
-  public createElement(tagName: string, attributes: unknown, children: unknown = null) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public createElement(tagName: string, attributes: any, children: any = null) {
     const element = this.renderer.createElement(tagName);
     if (attributes) {
       for (const attrName in attributes) {
@@ -99,7 +100,7 @@ export class DeckComponent implements OnInit, AfterViewInit {
     const deckElement = document.getElementById("deck");
 
     for (let i = 0; i < this.deck.getCardQuantity(); i++) {
-      let cardElement = this.createCard(i);
+      const cardElement = this.createCard(i);
       deckElement?.appendChild(cardElement);
       this.cards.push(cardElement);
     }
