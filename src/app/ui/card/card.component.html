@@ -1,5 +1,5 @@
 <div class="card"
-    (click)="flip()"
+    (click)="cardClicked.emit()"
     [@cardFlip]="cardState">
   <div class="face back">
     <img src="../../../assets/card-images/back.jpg" />

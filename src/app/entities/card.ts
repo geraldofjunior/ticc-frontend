@@ -30,7 +30,7 @@ export class Card {
       return MajorArcanaCard[this.suit];
     }
 
-    let rankName = "";
+    let rankName: string = "";
     switch (this.rank) {
       case 'A' : rankName = "Ace";    break;
       case 'KN': rankName = "Knight"; break;
@@ -40,7 +40,7 @@ export class Card {
       default  : rankName = this.rank;
     }
 
-    let suitName = MinorArcanaSuit[this.suit];
+    let suitName: string = MinorArcanaSuit[this.suit];
 
     this.fileName = suitName.toLowerCase() + "_" + rankName.toLowerCase() + ".jpg";
     return rankName + " of " + suitName;

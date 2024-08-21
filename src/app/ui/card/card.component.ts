@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Card } from './../../entities/card';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -20,6 +20,10 @@ export class CardComponent implements OnInit {
   public cardState: string = 'face-up';
   public imagePath: string = '';
   private position = { x: "0", y: "0"};
+
+  @Input() data!: Card;
+
+  @Output() cardClicked = new EventEmitter();
 
   public ngOnInit() {
   }
