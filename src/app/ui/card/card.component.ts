@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Card } from './../../entities/card';
 
 @Component({
@@ -15,21 +15,15 @@ import { Card } from './../../entities/card';
     ])
   ]
 })
-export class CardComponent implements OnInit {
+export class CardComponent  {
   public card!: Card;
-  public cardState: string = 'face-up';
-  public imagePath: string = '';
+  public cardState = 'face-up';
+  public imagePath = '';
   private position = { x: "0", y: "0"};
 
   @Input() data!: Card;
 
   @Output() cardClicked = new EventEmitter();
-
-  public ngOnInit() {
-  }
-
-  public constructor() {
-  }
 
   public flip(): void {
     this.card.flip();
@@ -37,9 +31,9 @@ export class CardComponent implements OnInit {
   }
 
   public initCard(index: number) {
-    let major: boolean = false,
-        rank : string  = "-1",
-        suit : number  = -1;
+    let major = false,
+        rank  = "-1",
+        suit  = -1;
     if (index < 22) {
       major = true;
       rank = index.toString();

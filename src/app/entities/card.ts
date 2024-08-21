@@ -2,21 +2,21 @@ import { MajorArcanaCard } from "../enums/major-arcana-card";
 import { MinorArcanaSuit } from "../enums/minor-arcana-suit.enum";
 
 export class Card {
-  private rank: string = "";
-  private suit: number = -1;
-  private name: string = "";
-  private fileName: string = "";
+  private rank = "";
+  private suit = -1;
+  private name = "";
+  private fileName = "";
   private position = { x: 0, y: 0 };
   private targetPosition = { x: 0, y: 0 };
-  private majorArcana: boolean = true;
-  private flipped: boolean = true;
-  private reversed: boolean = false;
+  private majorArcana = true;
+  private flipped = true;
+  private reversed = false;
 
   public constructor(
           isMajorArcana: boolean,
           rank: string,
-          suit: number = -1,
-          reversed: boolean = false) {
+          suit = -1,
+          reversed = false) {
     this.majorArcana = isMajorArcana;
     this.rank = rank;
     this.suit = suit;
@@ -30,7 +30,7 @@ export class Card {
       return MajorArcanaCard[this.suit];
     }
 
-    let rankName: string = "";
+    let rankName = "";
     switch (this.rank) {
       case 'A' : rankName = "Ace";    break;
       case 'KN': rankName = "Knight"; break;
@@ -40,7 +40,7 @@ export class Card {
       default  : rankName = this.rank;
     }
 
-    let suitName: string = MinorArcanaSuit[this.suit];
+    const suitName: string = MinorArcanaSuit[this.suit];
 
     this.fileName = suitName.toLowerCase() + "_" + rankName.toLowerCase() + ".jpg";
     return rankName + " of " + suitName;

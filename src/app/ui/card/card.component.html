@@ -1,10 +1,12 @@
 <div class="card"
+    tabindex="0"
     (click)="cardClicked.emit()"
+    (keypress)="cardClicked.emit()"
     [@cardFlip]="cardState">
   <div class="face back">
-    <img src="../../../assets/card-images/back.jpg" />
+    <img src="../../../assets/card-images/back.jpg" alt=""/>
   </div>
   <div class="face front">
-    <img [src]="imagePath" />
+    <img [src]="imagePath" alt="" />
   </div>
 </div>
