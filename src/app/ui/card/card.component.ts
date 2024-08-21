@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Card } from './../../entities/card';
+import { Card } from '../../entities/card';
 
 @Component({
   selector: 'app-card',
@@ -23,7 +23,7 @@ export class CardComponent  {
 
   @Input() data!: Card;
 
-  @Output() cardClicked = new EventEmitter();
+  @Output() cardFlip = new EventEmitter();
 
   public flip(): void {
     this.card.flip();

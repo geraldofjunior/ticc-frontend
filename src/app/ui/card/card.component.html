@@ -1,7 +1,7 @@
 <div class="card"
     tabindex="0"
-    (click)="cardClicked.emit()"
-    (keypress)="cardClicked.emit()"
+    (click)="cardFlip.emit()"
+    (keypress)="cardFlip.emit()"
     [@cardFlip]="cardState">
   <div class="face back">
     <img src="../../../assets/card-images/back.jpg" alt=""/>
