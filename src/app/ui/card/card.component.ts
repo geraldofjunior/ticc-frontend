@@ -30,20 +30,8 @@ export class CardComponent  {
     this.cardState = this.card.isFlipped() ? 'face-up' : 'face-down';
   }
 
-  public initCard(index: number) {
-    let major = false,
-        rank  = "-1",
-        suit  = -1;
-    if (index < 22) {
-      major = true;
-      rank = index.toString();
-      suit = index;
-    } else {
-      major = false;
-      suit = (index - 15) / 14;
-      rank = (((index - 22) % 14) + 1).toString();
-    }
-    this.card = new Card(major, rank, suit);
+  public setCard(card: Card): void {
+    this.card = card;
     this.imagePath = '../../../assets/card-images/' + this.card.getFileName();
   }
 

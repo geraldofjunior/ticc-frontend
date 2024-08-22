@@ -108,14 +108,12 @@ export class DeckComponent implements OnInit, AfterViewInit {
 
   public addCardComponents() {
     const cards = this.deck.getCards();
-    cards.forEach((card, index) => {
-      const ref = this.board.createComponent(CardComponent);
-      ref.instance.initCard(index);
+    let ref;
+    for (let index = 0; index < cards.length; index++) {
+      ref = this.board.createComponent(CardComponent);
+      ref.instance.setCard(cards[index]);
       this.cardComponents.push(ref);
-
-      console.log(ref.toString());
-    });
-    console.log(this.cardComponents);
+    }
   }
 
   public initializeDeck(): void {

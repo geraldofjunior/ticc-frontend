@@ -41,8 +41,9 @@ export class Card {
     }
 
     const suitName: string = MinorArcanaSuit[this.suit];
+    const imagePath = suitName + "_" + rankName + ".jpg";
 
-    this.fileName = suitName.toLowerCase() + "_" + rankName.toLowerCase() + ".jpg";
+    this.fileName = imagePath.toLowerCase();
     return rankName + " of " + suitName;
   }
 
@@ -56,6 +57,7 @@ export class Card {
   public getFileName = () => this.fileName;
   public isFlipped = () => this.flipped;
   public isReversed = () => this.reversed;
+  public isMajorArcana = () => this.majorArcana
 
   public setPosition = (x: number, y: number) => this.position = { x: x, y: y};
   public setTargetPosition = (x: number, y: number) => this.targetPosition = { x: x, y: y};
