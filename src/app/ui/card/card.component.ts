@@ -8,10 +8,10 @@ import { Card } from '../../entities/card';
   styleUrls: ['./card.component.css'],
   animations: [
     trigger('cardFlip', [
-      state('face-up', style({ transform: 'none'})),
-      state('face-down', style({ transform: 'rotateY(180deg)'})),
-      transition('default => flipped', [ animate('200ms') ]),
-      transition('flipped => default', [ animate('200ms') ])
+      state('face-up', style({ transform: 'rotateY(0deg)' })),
+      state('face-down', style({ transform: 'rotateY(180deg)' })),
+      transition('face-up => face-down', [animate('200ms')]),
+      transition('face-down => face-up', [animate('200ms')]),
     ])
   ]
 })
@@ -22,12 +22,12 @@ export class CardComponent  {
   private position = { x: "0", y: "0"};
 
   @Input() data!: Card;
-
-  @Output() cardFlip = new EventEmitter();
+  @Output() cardFlip = new EventEmitter<void>();
 
   public flip(): void {
     this.card.flip();
     this.cardState = this.card.isFlipped() ? 'face-up' : 'face-down';
+    this.cardFlip.emit();
   }
 
   public setCard(card: Card): void {
