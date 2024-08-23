@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Card } from '../../entities/card';
 
 @Component({
@@ -19,10 +19,14 @@ export class CardComponent  {
   public card!: Card;
   public cardState = 'face-up';
   public imagePath = '';
-  private position = { x: "0", y: "0"};
 
-  @Input() data!: Card;
+  @Input() positionX = 0;
+  @Input() positionY = 0;
   @Output() cardFlip = new EventEmitter<void>();
+
+  public offsetX = 0;
+  public offsetY = 0;
+  public isDragging = false;
 
   public flip(): void {
     this.card.flip();
@@ -35,11 +39,24 @@ export class CardComponent  {
     this.imagePath = '../../../assets/card-images/' + this.card.getFileName();
   }
 
-  public getPosition = () => this.position;
-  public getX = () => this.position.x;
-  public getY = () => this.position.y;
+  public onMouseDown(event: MouseEvent): void {
+    this.isDragging = true;
+    this.offsetX = event.clientX - this.positionX;
+    this.offsetY = event.clientY - this.positionY;
+    event.preventDefault();
+  }
 
-  public setPosition = (newX: number, newY: number) => this.position = { x: newX.toString(), y: newY.toString() }
-  public setX = (newX: number) => this.position.x = newX.toString();
+  @HostListener('document:mouseup')
+  public onMouseUp(): void {
+    this.isDragging = false;
+  }
+
+  @HostListener('document:mousemove', ['$event'])
+  public onMouseMove(event: MouseEvent): void {
+    if (this.isDragging) {
+      this.positionX = event.clientX - this.offsetX;
+      this.positionY = event.clientY - this.offsetY;
+    }
+  }
 
 }

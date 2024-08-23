@@ -1,21 +1,11 @@
 import { CardComponent } from './../card/card.component';
-import { animate, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Deck } from 'src/app/entities/deck';
 
 @Component({
   selector: 'app-deck',
   templateUrl: './deck.component.html',
-  styleUrls: ['./deck.component.css'],
-  animations: [
-    trigger('animateShuffle', [
-      transition(':enter', [
-        style({ transform: 'translate({{ xStart }}px, {{ yStart }}px)'}),
-        animate('200ms cubic-bezier(0.645, 0.045, 0.355, 1.000)'),
-        style({ transform: 'translate({{ xTarget }}px, {{ yTarget }}px)' })
-      ])
-    ])
-  ]
+  styleUrls: ['./deck.component.css']
 })
 export class DeckComponent implements OnInit, AfterViewInit {
   public cardComponents: ComponentRef<CardComponent>[] = [];
@@ -53,17 +43,26 @@ export class DeckComponent implements OnInit, AfterViewInit {
     // Spread them again
   }
 
-  private animateSpread() {
+  public animateSpread() {
     //// TODO: Implementar animateSpread
   }
 
   public addCardComponents() {
     const cards = this.deck.getCards();
-    let ref;
+    let component: ComponentRef<CardComponent>, element;
     for (let index = 0; index < cards.length; index++) {
-      ref = this.board.createComponent(CardComponent);
-      ref.instance.setCard(cards[index]);
-      this.cardComponents.push(ref);
+      component = this.board.createComponent(CardComponent);
+
+      component.instance.setCard(cards[index]);
+      component.instance.positionX = index * 10;
+      component.instance.positionY = 0;
+
+      element = component.location.nativeElement;
+      element.style.position = "absolute";
+      element.style.left = `${index * 15}px`;
+      element.style.bottom = `0px`;
+      element.style.zIndex = `${index}`;
+      element.style.pointerEvents = 'none';
     }
   }
 

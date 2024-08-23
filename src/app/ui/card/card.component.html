@@ -1,7 +1,10 @@
 <div class="card"
     tabindex="0"
+    [ngStyle]="{'left.px': positionX, 'top.px': positionY, 'pointer-events': 'auto'}"
     (click)="flip()"
-    (keypress)="flip()"
+    (keyup)="flip()"
+    (mousedown)="onMouseDown($event)"
+    (mouseup)="onMouseUp()"
     [@cardFlip]="cardState">
   <div class="face back">
     <img src="../../../assets/card-images/back.jpg" alt=""/>
