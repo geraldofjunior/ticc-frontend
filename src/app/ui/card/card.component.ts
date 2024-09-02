@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Card } from '../../entities/card';
 
 @Component({
@@ -28,6 +28,8 @@ export class CardComponent  {
   public offsetY = 0;
   public isDragging = false;
 
+  constructor(private elementRef: ElementRef) {}
+
   public flip(): void {
     this.card.flip();
     this.cardState = this.card.isFlipped() ? 'face-up' : 'face-down';
@@ -54,8 +56,9 @@ export class CardComponent  {
   @HostListener('document:mousemove', ['$event'])
   public onMouseMove(event: MouseEvent): void {
     if (this.isDragging) {
-      this.positionX = event.clientX - this.offsetX;
-      this.positionY = event.clientY - this.offsetY;
+      const element = this.elementRef.nativeElement;
+      element.style.left = event.clientX - this.offsetX + 'px';
+      element.style.top = event.clientY - this.offsetY + 'px';
     }
   }
 
