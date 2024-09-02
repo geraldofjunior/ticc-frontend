@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeckComponent } from './deck.component';
+import { SpreadComponent } from './spread.component';
 
-describe('DeckComponent', () => {
-  let component: DeckComponent;
-  let fixture: ComponentFixture<DeckComponent>;
+describe('SpreadComponent', () => {
+  let component: SpreadComponent;
+  let fixture: ComponentFixture<SpreadComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DeckComponent]
+      declarations: [SpreadComponent]
     });
-    fixture = TestBed.createComponent(DeckComponent);
+    fixture = TestBed.createComponent(SpreadComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

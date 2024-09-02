@@ -1,13 +1,13 @@
-import { CardComponent } from './../card/card.component';
-import { AfterViewInit, Component, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { CardComponent } from '../card/card.component';
+import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Deck } from 'src/app/entities/deck';
 
 @Component({
-  selector: 'app-deck',
-  templateUrl: './deck.component.html',
-  styleUrls: ['./deck.component.css']
+  selector: 'app-board',
+  templateUrl: './board.component.html',
+  styleUrls: ['./board.component.css']
 })
-export class DeckComponent implements OnInit, AfterViewInit {
+export class BoardComponent implements OnInit, AfterViewInit {
   public cardComponents: ComponentRef<CardComponent>[] = [];
   @ViewChild("board", { read: ViewContainerRef, static: false }) board!: ViewContainerRef;
 
@@ -21,6 +21,8 @@ export class DeckComponent implements OnInit, AfterViewInit {
     this.addCardComponents();
   }
 
+  constructor(private cdr: ChangeDetectorRef) {}
+
   public shuffleCards(): void {
     const deck = new Deck();
     deck.initDeck();
@@ -31,20 +33,12 @@ export class DeckComponent implements OnInit, AfterViewInit {
     this.addCardComponents();
   }
 
-  public animateStack(): void {
-    //// TODO: Implementar animateStack()
-  }
-
   public animateShuffle(): void {
     //// TODO: Implementar animateShuffle()
     // Center all cards
     // Shuffle their data
     // Show shuffle animation
     // Spread them again
-  }
-
-  public animateSpread() {
-    //// TODO: Implementar animateSpread
   }
 
   public addCardComponents() {
@@ -54,15 +48,14 @@ export class DeckComponent implements OnInit, AfterViewInit {
       component = this.board.createComponent(CardComponent);
 
       component.instance.setCard(cards[index]);
-      component.instance.positionX = index * 10;
-      component.instance.positionY = 0;
 
       element = component.location.nativeElement;
-      element.style.position = "absolute";
-      element.style.left = `${index * 15}px`;
-      element.style.bottom = `0px`;
+      element.style.display = 'inline-block';
+      element.style.position = 'relative';
       element.style.zIndex = `${index}`;
       element.style.pointerEvents = 'none';
+
+      this.cdr.detectChanges();
     }
   }
 

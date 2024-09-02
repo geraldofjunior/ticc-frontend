@@ -1,13 +1,13 @@
 <div class="card"
     tabindex="0"
-    [ngStyle]="{'left.px': positionX, 'top.px': positionY, 'pointer-events': 'auto'}"
+    [ngStyle]="{'left.px': positionX, 'top.px': positionY, 'pointer-events': 'auto', 'position': 'absolute'}"
     (click)="flip()"
     (keyup)="flip()"
     (mousedown)="onMouseDown($event)"
     (mouseup)="onMouseUp()"
     [@cardFlip]="cardState">
   <div class="face back">
-    <img src="../../../assets/card-images/back.jpg" alt=""/>
+    <img src="../../../assets/card-images/back.jpg" alt/>
   </div>
   <div class="face front">
     <img [src]="imagePath" alt="" />

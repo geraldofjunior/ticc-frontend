@@ -1,11 +1,11 @@
 .card {
-  position: absolute;
-  width: 10em;
-  height: 17em;
+  position: relative;
+  width: 7em;
+  height: 12em;
   box-shadow: 0 0.0625em 0.125em rgba(0, 0, 0, 0.15);
   border-radius: 0.25em;
   margin: 3px;
-  cursor: pointer;
+  cursor: grab;
   transform-style: preserve-3d;
 }
 .card img {
@@ -13,13 +13,14 @@
   height: 100%;
   object-fit: cover;
   border-radius: inherit;
+  display: inline-block;
 }
 
 :host {
   margin: 3px;
   padding: 3px;
-  width: 10em;
-  height: 17em;
+  width: 7em;
+  height: 12em;
   list-style: none;
 }
 
@@ -40,4 +41,8 @@
 
 .front {
   transform: rotateY(180deg);
+}
+
+.card:active {
+  cursor: grabbing;
 }

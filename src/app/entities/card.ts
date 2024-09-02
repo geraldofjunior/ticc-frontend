@@ -6,8 +6,6 @@ export class Card {
   private suit = -1;
   private name = "";
   private fileName = "";
-  private position = { x: 0, y: 0 };
-  private targetPosition = { x: 0, y: 0 };
   private majorArcana = true;
   private flipped = true;
   private reversed = false;
@@ -50,17 +48,11 @@ export class Card {
   public getName = () => this.name;
   public getSuit = () => this.suit;
   public getRank = () => this.rank;
-  public getX = () => this.position.x;
-  public getY = () => this.position.y;
-  public getPosition = () => this.position;
-  public getTargetPosition = () => this.targetPosition;
   public getFileName = () => this.fileName;
   public isFlipped = () => this.flipped;
   public isReversed = () => this.reversed;
   public isMajorArcana = () => this.majorArcana
 
-  public setPosition = (x: number, y: number) => this.position = { x: x, y: y};
-  public setTargetPosition = (x: number, y: number) => this.targetPosition = { x: x, y: y};
   public flip = () => this.flipped = !this.flipped;
   public reverse = () => this.reversed = !this.reversed;
 }
