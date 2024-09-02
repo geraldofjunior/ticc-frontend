@@ -31,26 +31,35 @@ export class SpreadComponent implements AfterViewInit {
     this.positions.forEach((position) => {
       const positionElement = document.createElement('div');
       positionElement.id = position.id;
-      positionElement.classList.add('position');
+      positionElement.classList.add('position-container');
+      positionElement.style.width = '8em';
+      positionElement.style.height = '13em';
+      positionElement.style.border = '1px solid #ccc';
+      positionElement.style.margin = '10px';
+      positionElement.style.backgroundColor = '#f0f0f0';
       this.spreadContainer.nativeElement.appendChild(positionElement);
 
       // Add event listener for drop event
       positionElement.addEventListener('dragover', (e) => {
         e.preventDefault();
+        console.log("Dragging over position " + position.id);
       });
 
       positionElement.addEventListener('drop', (e) => {
         e.preventDefault();
         const cardData = e.dataTransfer !== null ? JSON.parse(e.dataTransfer.getData('card')) : new Card(true, "-1", 0, false);
         this.dropCard(cardData, position.id);
+        console.log("Dropped card in position " + position.id);
       });
     });
+
   }
 
   dropCard(cardData: Card, positionId: string): void {
     const position = this.positions.find((s) => s.id === positionId);
     if (position) {
       position.card = cardData;
+      console.log("Dropped card in position " + positionId);
     }
   }
 }
