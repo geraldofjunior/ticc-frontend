@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Card } from '../../entities/card';
+import { CdkDragEnd, CdkDragMove } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-card',
@@ -15,7 +16,7 @@ import { Card } from '../../entities/card';
     ])
   ]
 })
-export class CardComponent  {
+export class CardComponent {
   public card!: Card;
   public cardState = 'face-up';
   public imagePath = '';
@@ -24,15 +25,7 @@ export class CardComponent  {
   @Input() positionY = 0;
   @Output() cardFlip = new EventEmitter<void>();
 
-  public offsetX = 0;
-  public offsetY = 0;
-  public isDragging = false;
-
-  constructor(private elementRef: ElementRef) {}
-
   public flip(): void {
-    this.card.flip();
-    this.cardState = this.card.isFlipped() ? 'face-up' : 'face-down';
     this.cardFlip.emit();
   }
 
@@ -41,25 +34,26 @@ export class CardComponent  {
     this.imagePath = '../../../assets/card-images/' + this.card.getFileName();
   }
 
-  public onMouseDown(event: MouseEvent): void {
-    this.isDragging = true;
-    this.offsetX = event.clientX - this.positionX;
-    this.offsetY = event.clientY - this.positionY;
-    event.preventDefault();
+  // Este método será chamado sempre que o drag se mover
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public onDrag(event: CdkDragMove): void {
+    // Se quiser fazer algo enquanto o item está sendo arrastado, adicione aqui
   }
 
-  @HostListener('document:mouseup')
-  public onMouseUp(): void {
-    this.isDragging = false;
+  public setPosition(x:number, y: number): void {
+    this.positionX = x;
+    this.positionY = y;
   }
 
-  @HostListener('document:mousemove', ['$event'])
-  public onMouseMove(event: MouseEvent): void {
-    if (this.isDragging) {
-      const element = this.elementRef.nativeElement;
-      element.style.left = event.clientX - this.offsetX + 'px';
-      element.style.top = event.clientY - this.offsetY + 'px';
-    }
-  }
+  // Este método é chamado quando o drag termina
+  public onDragEnd(event: CdkDragEnd): void {
+    const { x, y } = event.distance;  // Distância que o item foi movido
+    console.log(`Distância: \n X: ${x}\n Y: ${y}`);
 
+    const newPosition = {  x: this.positionX + x, y: this.positionY + y };
+
+    this.setPosition( newPosition.x, newPosition.y );
+
+    console.log(`Posição: \n X: ${this.positionX} \n Y: ${this.positionY}`);
+  }
 }

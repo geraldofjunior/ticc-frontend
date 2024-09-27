@@ -33,27 +33,22 @@ export class BoardComponent implements OnInit, AfterViewInit {
     this.addCardComponents();
   }
 
-  public animateShuffle(): void {
-    //// TODO: Implementar animateShuffle()
-    // Center all cards
-    // Shuffle their data
-    // Show shuffle animation
-    // Spread them again
-  }
-
   public addCardComponents() {
     const cards = this.deck.getCards();
     let component: ComponentRef<CardComponent>, element;
+    const offset = 15;
     for (let index = 0; index < cards.length; index++) {
       component = this.board.createComponent(CardComponent);
-
       component.instance.setCard(cards[index]);
+      component.instance.positionX = index * offset;
 
       element = component.location.nativeElement;
-      element.style.display = 'inline-block';
-      element.style.position = 'relative';
+
+      element.style.display = 'block';
+      element.style.position = 'absolute';
       element.style.zIndex = `${index}`;
-      element.style.pointerEvents = 'none';
+      element.style.width = '7em';
+      element.style.height = '12em';
 
       this.cdr.detectChanges();
     }

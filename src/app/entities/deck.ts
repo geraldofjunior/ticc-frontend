@@ -3,7 +3,7 @@ import { Card } from "./card";
 export class Deck {
   private cards:Card[] = new Array<Card>();
 
-  public initDeck(): void {
+  /*public initDeck(): void {
     let suit = 0;
     if (this.cards.length > 0) this.cards = new Array<Card>();
     // Init major arcana
@@ -15,6 +15,12 @@ export class Deck {
 
     for (suit = 0; suit < 4; suit++)
       ranks.forEach(rank => this.cards.push(new Card(false, rank, suit)));
+  }*/
+
+  public initDeck(): void {
+    for (let i =  0; i < 78; i++) {
+      this.cards.push(new Card(i));
+    }
   }
 
   public shuffle(): Array<Card> {

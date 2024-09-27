@@ -1,6 +1,6 @@
 export enum MinorArcanaSuit {
-  "Swords",
-  "Cups",
-  "Wands",
-  "Pentacles"
+  "Espadas",
+  "Copas",
+  "Paus",
+  "Ouros"
 }

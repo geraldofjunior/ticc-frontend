@@ -1,0 +1,13 @@
+<div class="table-container">
+  <div class="cards-container">
+    <div class="deck" *ngFor="let card of cards">
+      <div class="card">
+        <div class="card-front">
+          <input type="hidden" class="card-index" value="{{card.getIndex()}}">
+          <img src="../../../assets/card-images/{{card.getFileName()}}" alt=""/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="spread-container"></div>
+</div>

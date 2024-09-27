@@ -47,7 +47,7 @@ export class SpreadComponent implements AfterViewInit {
 
       positionElement.addEventListener('drop', (e) => {
         e.preventDefault();
-        const cardData = e.dataTransfer !== null ? JSON.parse(e.dataTransfer.getData('card')) : new Card(true, "-1", 0, false);
+        const cardData = e.dataTransfer !== null ? JSON.parse(e.dataTransfer.getData('card')) : new Card(0);
         this.dropCard(cardData, position.id);
         console.log("Dropped card in position " + position.id);
       });

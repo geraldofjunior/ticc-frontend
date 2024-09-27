@@ -1,27 +1,31 @@
 .card {
-  position: relative;
+  position: absolute;
+  display: block;
+  cursor: grab;
+  border-radius: 0.25em;
   width: 7em;
   height: 12em;
-  box-shadow: 0 0.0625em 0.125em rgba(0, 0, 0, 0.15);
-  border-radius: 0.25em;
-  margin: 3px;
-  cursor: grab;
+  perspective: 1000px;
   transform-style: preserve-3d;
-}
-.card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: inherit;
-  display: inline-block;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+              0 2px 2px 0 rgba(0, 0, 0, 0.14),
+              0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
-:host {
+.card:active {
+  cursor: grabbing;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.card:host {
   margin: 3px;
   padding: 3px;
   width: 7em;
   height: 12em;
   list-style: none;
+  pointer-events: auto;
 }
 
 .face {
@@ -30,19 +34,15 @@
   height: 100%;
   border-radius: inherit;
   backface-visibility: hidden;
+}
 
-  > img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: inherit;
-  }
+.face > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
 }
 
 .front {
   transform: rotateY(180deg);
-}
-
-.card:active {
-  cursor: grabbing;
 }

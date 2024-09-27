@@ -1,4 +1,16 @@
 .deck-container {
   display: flex;
+  flex-wrap: wrap;
   flex-direction:row;
+  height: 13em;
+}
+
+.deck-container > * {
+  margin: 0.5em;
+  padding: 0.5em;
+  pointer-events: auto !important;
+}
+
+app-card {
+  border: 3px solid red;
 }
