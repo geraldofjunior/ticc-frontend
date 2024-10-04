@@ -1,13 +1,21 @@
 <div class="table-container">
   <div class="cards-container">
-    <div class="deck" *ngFor="let card of cards">
-      <div class="card">
+    <div *ngFor="let card of cards; let i = index">
+      <div class="card"
+              id="card-{{card.getIndex()}}"
+              (click)="cardClick(i)"
+              (keypress)="cardClick(i)"
+              tabindex=""
+              >
         <div class="card-front">
-          <input type="hidden" class="card-index" value="{{card.getIndex()}}">
-          <img src="../../../assets/card-images/{{card.getFileName()}}" alt=""/>
+          <img src="../../../assets/card-images/{{card.getFileName()}}" alt="">
         </div>
       </div>
     </div>
   </div>
-  <div class="spread-container"></div>
+  <div class="spread-container">
+    <div class="position" id="position-1"><div class="selected-card"></div></div>
+    <div class="position" id="position-2"><div class="selected-card"></div></div>
+    <div class="position" id="position-3"><div class="selected-card"></div></div>
+  </div>
 </div>
